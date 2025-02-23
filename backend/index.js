@@ -4,11 +4,18 @@ import messageRoute from './routes/messageRoute.js'
 import dotenv from 'dotenv';
 import { connectDB } from "./config/db.js";
 import cookieParser from "cookie-parser";
+import cors from 'cors';
 const app = express();
 
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+      origin: process.env.CLIENT_URL,
+      credentials: true,
+      allowedHeaders: ['Content-Type', 'Authorization']
+}
+));
 app.use('/api/auth', authRoute);
 app.use('/api/message', messageRoute)
 

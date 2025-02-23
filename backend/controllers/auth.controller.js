@@ -4,7 +4,7 @@ import {generateToken} from '../config/utils.js'
 import cloudinary from '../config/cloudinary.js'
 
 export const signupController = async (req, res) => {
-      const {fullName, email, password, profilePic} = req.body;
+      const {fullName, email, password} = req.body;
       try {
             if(password.length < 8){
                   return res.status(400).json({message: 'Password must be at least 8 characters long'});
@@ -20,7 +20,6 @@ export const signupController = async (req, res) => {
                   fullName,
                   email,
                   password: hashedPassword,
-                  profilePic: profilePic || ''
             })
 
             if(newUser) {
@@ -30,7 +29,6 @@ export const signupController = async (req, res) => {
                         _id: newUser._id,
                         fullName: newUser.fullName,
                         email: newUser.email,
-                        profilePic: newUser.profilePic
                   });
             }else {
                   res.status(400).json({message: 'Failed to create user'});

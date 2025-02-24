@@ -38,10 +38,8 @@ import SettingsPage from './pages/SettingsPage.jsx'
 // ])
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {/* <RouterProvider router={router} /> */}
     <BrowserRouter>
       <App/>
     </BrowserRouter>
-  </StrictMode>,
+  ,
 )

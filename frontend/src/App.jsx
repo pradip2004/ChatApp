@@ -9,16 +9,20 @@ import SettingsPage from './pages/SettingsPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
+import { useThemeStore } from './store/useThemeStore.js'
 
 
 function App() {
-  const {authUser, checkAuth, isCheckingAuth} = useAuthStore();
+  const {authUser, checkAuth, isCheckingAuth, onlineUsers} = useAuthStore();
+ const {theme}=useThemeStore()
+
+ console.log({onlineUsers});
 
   useEffect(()=>{
     checkAuth()
-  }, [checkAuth, authUser])
+  }, [checkAuth])
 
-  console.log(authUser)
+  // console.log(authUser)
 
   if(isCheckingAuth && !authUser) return (
     <div className='flex items-center justify-center h-screen'>
@@ -28,7 +32,7 @@ function App() {
 
 
   return (
-    <div >
+    <div data-theme={theme} className='h-screen overflow-y-scroll'>
       <Navbar />
       <Routes>
         <Route path='/' element={authUser ? <HomePage/>: <Navigate to="/login"/>}/>
